@@ -1,0 +1,1515 @@
+# 基础样式继承自LLVM风格
+# 可选值: LLVM, Google, Chromium, Mozilla, WebKit, GNU, Microsoft, etc.
+# LLVM: 4空格缩进、大括号换行
+# Google: 2空格缩进、大括号不换行
+# Chromium: 80字符行宽、4空格缩进
+BasedOnStyle: LLVM
+
+# 编程语言为C++
+# 可选值: Cpp, Java, JavaScript, Proto, TableGen, TextProto适用于C++代码格式化，不影响其他语言
+Language: Cpp
+
+# 访问修饰符(public/private等)的缩进偏移量
+# 可选值: 整数(通常为负数)
+# -4:
+# class MyClass {
+# public:       // 缩进-4个空格
+#     void foo();
+# };
+# 0:
+# class MyClass {
+# public:  // 不缩进
+#     void foo();
+# };
+AccessModifierOffset: -4
+
+# 括号后对齐配置
+# 可选值: DontAlign, Align, AlwaysBreak
+# -------------------
+# DontAlign:
+# -------------------
+# void foo(int a,
+#     float b);  // 参数不对齐
+# -------------------
+# Align:
+# -------------------
+# void foo(int  a,
+#          float b);  // 参数对齐
+# -------------------
+# AlwaysBreak:
+# -------------------
+# void foo(
+#     int a,
+#     float b);  // 总是换行
+AlignAfterOpenBracket: DontAlign
+
+# 宏定义对齐(跨空行和注释)
+# 可选值: false, true, AcrossEmptyLines, AcrossComments, AcrossEmptyLinesAndComments
+# -------------------
+# false:
+# -------------------
+# #define A 1
+# #define LONG_NAME 3
+# -------------------
+# true:
+# -------------------
+# #define A         1
+# #define LONG_NAME 3
+# -------------------
+# AcrossEmptyLinesAndComments:
+# -------------------
+# #define A  1
+# #define B  2
+# /* comment */
+# #define LONG_NAME 3  // 跨空行和注释对齐
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+
+# 连续赋值语句对齐
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int a = 1;
+# long b = 2;
+# -------------------
+# true:
+# -------------------
+# int a  = 1;
+# long b = 2;  // =号对齐
+AlignConsecutiveAssignments: true
+
+# 连续声明对齐
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int a;
+# double b;
+# -------------------
+# true:
+# -------------------
+# int    a;
+# double b;  // 类型和变量名对齐
+AlignConsecutiveDeclarations: true
+
+# 反斜杠换行对齐
+# 可选值: Left(左对齐) | Right(右对齐) | DontAlign(不对齐)
+# -------------------
+# Left:
+# -------------------
+# #define LONG_MACRO \
+#     line1          \  // 反斜杠左对齐
+#     line2
+# -------------------
+# Right:
+# -------------------
+# #define LONG_MACRO \
+#             line1  \  // 反斜杠右对齐
+#             line2
+# -------------------
+# DontAlign:
+# -------------------
+# #define LONG_MACRO \
+#     line1 \  // 反斜杠不对齐
+#     line2
+AlignEscapedNewlines: Left
+
+# 操作数对齐
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int sum = a +
+#     b;
+# -------------------
+# true:
+# -------------------
+# int sum = a +
+#           b;  // 操作数对齐
+AlignOperands: true
+
+# 尾随注释对齐
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int x; // 注释1
+# double y; // 注释2
+# -------------------
+# true:
+# -------------------
+# int x;    // 注释1
+# double y; // 注释2对齐
+AlignTrailingComments: true
+
+# 允许所有参数换行
+# 可选值: true | false
+# -------------------
+# true:
+# -------------------
+# void foo(int a, int b,
+#          int c);  // 允许所有参数换行
+# -------------------
+# false:
+# -------------------
+# void foo(int a, int b, int c);  // 不允许参数换行
+AllowAllArgumentsOnNextLine: true
+
+# 允许构造函数初始化列表全部换行
+# 可选值: true | false
+# -------------------
+# true:
+# -------------------
+# MyClass::MyClass() : a(1), b(2)  // 初始化列表全部在一行
+# {}
+# -------------------
+# false:
+# -------------------
+# MyClass::MyClass()
+#     : a(1), b(2)  // 初始化列表换行
+# {}
+# AllowAllConstructorInitializersOnNextLine: false
+
+# 允许函数声明参数全部换行
+# 可选值: true | false
+# -------------------
+# true:
+# -------------------
+# void foo(int a,
+#          int b);  // 函数声明参数全部换行
+# -------------------
+# false:
+# -------------------
+# void foo(int a, int b);  // 不允许参数换行
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# 允许简短代码块放在单行
+# 可选值: false, true, Empty, Never
+# -------------------
+# true:
+# -------------------
+# if (x) { return; }  // 简单代码块可以在一行
+# -------------------
+# false:
+# -------------------
+# if (x) {
+#     return;
+# }  // 简单代码块必须换行
+# -------------------
+# Empty:
+# -------------------
+# if (x) {}  // 仅空块可以在一行
+AllowShortBlocksOnASingleLine: true
+
+# 允许简短case标签放在单行
+# 可选值: false, true
+# -------------------
+# true:
+# -------------------
+# switch (x) {
+# case 1: break;  // 简单case可以在一行
+# }
+# -------------------
+# false:
+# -------------------
+# switch (x) {
+# case 1:
+#     break;  // case必须换行
+# }
+AllowShortCaseLabelsOnASingleLine: true
+
+# 允许短函数放在单行
+# 可选值: None, Inline, Empty, All
+# -------------------
+# None:
+# -------------------
+# inline void foo() {
+#     return;
+# }  // 不允许任何短函数在一行
+# -------------------
+# Inline:
+# -------------------
+# inline void foo() { return; }  // 仅inline短函数可以在一行
+# -------------------
+# Empty:
+# -------------------
+# void foo() {}  // 仅空函数可以在一行
+AllowShortFunctionsOnASingleLine: Inline
+
+# 允许短lambda表达式放在单行
+# 可选值: None(不允许) | Inline(仅inline允许) | Empty(空lambda允许) | All(所有允许)
+# -------------------
+# None:
+# -------------------
+# auto f = [] {
+#     return 0;
+# };  // 不允许短lambda在一行
+# -------------------
+# All:
+# -------------------
+# auto f = [] { return 0; };  // 短lambda可以在一行
+# AllowShortLambdasOnASingleLine: All
+
+# 允许简短if语句放在单行
+# 可选值: false, true, Never, WithoutElse, OnlyFirstIf
+# -------------------
+# false:
+# -------------------
+# if (x) {
+#     return;
+# }  // 不允许单行if
+# -------------------
+# true:
+# -------------------
+# if (x) return;  // 允许单行if
+# -------------------
+# WithoutElse:
+# -------------------
+# if (x) return;  // 允许无else的单行if
+# else {
+#     return;
+# }
+AllowShortIfStatementsOnASingleLine: false
+
+# 允许简短循环放在单行
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# while (x) {
+#     x--;
+# }  // 不允许单行循环
+# -------------------
+# true:
+# -------------------
+# while (x) x--;  // 允许单行循环
+AllowShortLoopsOnASingleLine: false
+
+# 返回类型后不强制换行
+# 可选值: None, All, TopLevel
+# -------------------
+# None:
+# -------------------
+# int foo() {  // 返回类型后不换行
+#     return 0;
+# }
+# -------------------
+# All:
+# -------------------
+# int
+# foo() {  // 所有返回类型后换行
+#     return 0;
+# }
+AlwaysBreakAfterReturnType: None
+
+# 不强制在多行字符串前换行
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# const char* s = "line1\n"  // 字符串前不强制换行
+#                 "line2";
+# -------------------
+# true:
+# -------------------
+# const char* s =
+#     "line1\n"  // 字符串前强制换行
+#     "line2";
+AlwaysBreakBeforeMultilineStrings: false
+
+# 模板声明强制换行
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# template <typename T> class MyClass {};
+# -------------------
+# true:
+# -------------------
+# template <typename T>
+# class MyClass {};  // 模板声明总是换行
+AlwaysBreakTemplateDeclarations: true
+
+# 参数打包配置
+# 可选值: true(打包) | false(不打包)
+# -------------------
+# true:
+# -------------------
+# void foo(int a, int b,
+#          int c);  // 参数打包在一行
+# -------------------
+# false:
+# -------------------
+# void foo(
+#     int a,
+#     int b,
+#     int c);  // 参数不打包
+# BinPackArguments: true
+# BinPackParameters: true
+
+# 大括号换行规则
+BraceWrapping:
+  # case标签后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # switch (x) {
+  # case 1: break;  // case后不换行
+  # }
+  # -------------------
+  # true:
+  # -------------------
+  # switch (x) {
+  # case 1:
+  #     break;  // case后换行
+  AfterCaseLabel: true
+  
+  # 类定义后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # class MyClass {};  // 类后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # class MyClass
+  # {};  // 类后换行
+  AfterClass: true
+  
+  # 控制语句后换行(多行时)
+  # 可选值: Never, MultiLine, Always
+  # -------------------
+  # Never:
+  # -------------------
+  # if (long_condition1 &&
+  #     long_condition2) {  // 控制语句后不换行
+  # }
+  # -------------------
+  # Always:
+  # -------------------
+  # if (long_condition1 &&
+  #     long_condition2)
+  # {  // 控制语句后换行
+  # }
+  AfterControlStatement: Always
+  
+  # 枚举定义后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # enum Color { Red };  // 枚举后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # enum Color
+  # {  // 枚举后换行
+  #     Red
+  # };
+  AfterEnum: true
+  
+  # 函数定义后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # void foo() {  // 函数后不换行
+  # }
+  # -------------------
+  # true:
+  # -------------------
+  # void foo()
+  # {  // 函数后换行
+  # }
+  AfterFunction: true
+  
+  # 命名空间后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # namespace N {  // 命名空间后不换行
+  # }
+  # -------------------
+  # true:
+  # -------------------
+  # namespace N
+  # {  // 命名空间后换行
+  # }
+  AfterNamespace: false
+  
+  # ObjC声明后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # @interface MyClass
+  # @end  // ObjC声明后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # @interface MyClass
+  # @end  // ObjC声明后换行
+  AfterObjCDeclaration: false
+
+  # 结构体定义后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # struct Point { int x; };  // 结构体后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # struct Point
+  # {  // 结构体后换行
+  #     int x;
+  # };
+  AfterStruct: true
+  
+  # 联合体定义后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # union Data { int i; };  // 联合体后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # union Data
+  # {  // 联合体后换行
+  #     int i;
+  # };
+  AfterUnion: true
+  
+  # extern块后换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # extern "C" {
+  # }  // extern块后不换行
+  # -------------------
+  # true:
+  # -------------------
+  # extern "C" {
+  # }  // extern块后换行
+  AfterExternBlock: false
+  
+  # catch前换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # try { ... } catch (...) { ... }  // catch前不换行
+  # -------------------
+  # true:
+  # -------------------
+  # try { ... }
+  # catch (...) { ... }  // catch前换行
+  BeforeCatch: true
+  
+  # else前换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # if (x) { ... } else { ... }  // else前不换行
+  # -------------------
+  # true:
+  # -------------------
+  # if (x) { ... }
+  # else { ... }  // else前换行
+  BeforeElse: true
+  
+  # lambda体前换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # auto f = [] { return 0; };  // lambda体前不换行
+  # -------------------
+  # true:
+  # -------------------
+  # auto f = []
+  # { return 0; };  // lambda体前换行
+  BeforeLambdaBody: false
+  
+  # while前换行
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # do { ... } while (x);  // while前不换行
+  # -------------------
+  # true:
+  # -------------------
+  # do { ... }
+  # while (x);  // while前换行
+  BeforeWhile: false
+  
+  # 大括号缩进
+  # 可选值: true | false
+  # -------------------
+  # false:
+  # -------------------
+  # if (x)
+  # {  // 大括号不额外缩进
+  # }
+  # -------------------
+  # true:
+  # -------------------
+  # if (x)
+  #     {  // 大括号额外缩进
+  #     }
+  # IndentBraces: false
+  
+  # 分割空函数
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # void foo() {}  // 空函数不分割
+  # -------------------
+  # true:
+  # -------------------
+  # void foo()
+  # {}  // 空函数分割
+  SplitEmptyFunction: false
+  
+  # 分割空记录
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # struct Empty {};  // 空结构体不分割
+  # -------------------
+  # true:
+  # -------------------
+  # struct Empty
+  # {};  // 空结构体分割
+  SplitEmptyRecord: false
+  
+  # 分割空命名空间
+  # 可选值: false, true
+  # -------------------
+  # false:
+  # -------------------
+  # namespace N {}  // 空命名空间不分割
+  # -------------------
+  # true:
+  # -------------------
+  # namespace N
+  # {}  // 空命名空间分割
+  SplitEmptyNamespace: false
+
+# 在非赋值运算符前换行
+# 可选值: None, NonAssignment, All
+# -------------------
+# None:
+# -------------------
+# int sum = a + b;  // 不在任何运算符前换行
+# NonAssignment:
+# int sum = a +
+#           b;  // 非赋值运算符前换行
+BreakBeforeBinaryOperators: NonAssignment
+
+# 使用自定义的大括号换行规则
+# 可选值: Attach, Linux, Mozilla, Stroustrup, Allman, GNU, Custom
+# Attach:
+# if (x) {  // 大括号不换行
+# }
+# Allman:
+# if (x)
+# {  // 大括号总是换行
+# }
+BreakBeforeBraces: Linux
+
+# 继承列表中的逗号前换行
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# class Derived : public Base1, public Base2
+# -------------------
+# true:
+# -------------------
+# class Derived :
+#     public Base1  // 逗号前换行
+#     , public Base2
+# BreakBeforeInheritanceComma: false
+
+# 继承列表换行规则
+# 可选值: BeforeColon, BeforeComma, AfterColon
+# -------------------
+# BeforeColon:
+# -------------------
+# class Derived  // 冒号前换行
+#     : public Base1, public Base2
+# -------------------
+# AfterColon:
+# -------------------
+# class Derived :  // 冒号后换行
+#     public Base1, public Base2
+# BreakInheritanceList: BeforeColon
+
+# 三元运算符前换行
+# 可选值: true | false(不换行)
+# -------------------
+# false:
+# -------------------
+# int x = condition ? value1 : value2;
+# -------------------
+# true:
+# -------------------
+# int x = condition ?
+#         value1 :  // 三元运算符前换行
+#         value2;
+# BreakBeforeTernaryOperators: true
+
+# 构造函数初始化列表逗号前换行
+# 可选值: true | false(不换行)
+# -------------------
+# false:
+# -------------------
+# MyClass::MyClass() : a(1), b(2)
+# -------------------
+# true:
+# -------------------
+# MyClass::MyClass()
+#     : a(1)  // 逗号前换行
+#     , b(2)
+# BreakConstructorInitializersBeforeComma: false
+
+# 构造函数初始化列表换行规则
+# 可选值: BeforeColon(冒号前换行) | BeforeComma(逗号前换行) | AfterColon(冒号后换行)
+# -------------------
+# BeforeColon:
+# -------------------
+# MyClass::MyClass()  // 冒号前换行
+#     : a(1), b(2)
+# -------------------
+# AfterColon:
+# -------------------
+# MyClass::MyClass() :  // 冒号后换行
+#     a(1), b(2)
+# BreakConstructorInitializers: BeforeColon
+
+# Java字段注解后换行
+# 可选值: true | false(不换行)
+# -------------------
+# false:
+# -------------------
+# @Annotation int field;  // 注解后不换行
+# -------------------
+# true:
+# -------------------
+# @Annotation  // 注解后换行
+# int field;
+# BreakAfterJavaFieldAnnotations: false
+
+# 字符串字面量换行
+# 可选值: true | false(不换行)
+# -------------------
+# false:
+# -------------------
+# const char* s = "very long string";
+# -------------------
+# true:
+# -------------------
+# const char* s = "very long "
+#                 "string";  // 字符串自动换行
+# BreakStringLiterals: true
+
+# 每行最大字符数
+# 可选值: 0(不限制) 或正整数
+# 0: 不限制行宽
+# 80: 超过80字符的行会被自动换行
+ColumnLimit: 0
+
+# 注释编译指示
+# 值类型: 正则表达式字符串
+# "^ NOLINT:":
+# /* NOLINT */  // 不格式化此注释
+# "":
+# /* NOLINT */  // 会格式化此注释
+# CommentPragmas: "^ NOLINT:"
+
+# 紧凑命名空间
+# 可选值: true(紧凑) | false(不紧凑)
+# -------------------
+# false:
+# -------------------
+# namespace A {
+# namespace B {
+# }
+# }
+# -------------------
+# true:
+# -------------------
+# namespace A { namespace B {
+# }}
+# CompactNamespaces: false
+
+# 构造函数初始化列表每行一个或全部在一行
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# MyClass::MyClass()
+#     : a(1), b(2)  // 初始化列表可以在一行
+# -------------------
+# true:
+# -------------------
+# MyClass::MyClass()
+#     : a(1)  // 每行一个初始化
+#     , b(2)
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+
+# 构造函数初始化列表缩进宽度
+# 值类型: 整数
+# 4:
+# MyClass::MyClass()
+#     : a(1)  // 缩进4个空格
+#     , b(2)
+# 2:
+# MyClass::MyClass()
+#   : a(1)  // 缩进2个空格
+#   , b(2)
+# ConstructorInitializerIndentWidth: 4
+
+# 续行缩进宽度
+# 可选值: 正整数
+# 4:
+# int veryLongVariableName =
+#     100;  // 续行缩进4个空格
+# 2:
+# int veryLongVariableName =
+#   100;  // 续行缩进2个空格
+ContinuationIndentWidth: 4
+
+# C++11大括号列表样式
+# 可选值: true(启用) | false(禁用)
+# -------------------
+# true:
+# -------------------
+# vector<int> v{1, 2, 3};  // 使用C++11大括号初始化
+# -------------------
+# false:
+# -------------------
+# vector<int> v(1, 2, 3);  // 不使用大括号初始化
+# Cpp11BracedListStyle: true
+
+# 推导行结束符
+# 可选值: true(推导) | false(不推导)
+# -------------------
+# true: 根据文件内容自动检测使用LF
+# -------------------或CRLF
+# -------------------
+# false: 使用默认行结束符
+# -------------------
+# DeriveLineEnding: true
+
+# 推导指针对齐
+# 可选值: true(推导) | false(不推导)
+# -------------------
+# true: 根据上下文自动推导指针的对
+# -------------------齐方式
+# -------------------
+# false: 使用固定指针对齐方式
+# -------------------
+# DerivePointerAlignment: true
+
+# 禁用格式化
+# 可选值: true(禁用) | false(启用)
+# -------------------
+# true:
+# -------------------
+# // clang-format off
+# int   x   =   1;  // 不格式化
+# // clang-format on
+# -------------------
+# false:
+# -------------------
+# int   x   =   1;  // 会格式化
+# DisableFormat: false
+
+# 自动检测参数打包
+# 可选值: true(自动检测) | false(不自动检测)
+# -------------------
+# true: 自动决定是否将参数打包在一行
+# -------------------
+# -------------------
+# false: 使用固定参数打包规则
+# -------------------
+# ExperimentalAutoDetectBinPacking: false
+
+# 修复命名空间注释
+# 可选值: true(修复) | false(不修复)
+# -------------------
+# true:
+# -------------------
+# namespace A {
+# // namespace A  // 自动修复命名空间注释
+# }
+# -------------------
+# false:
+# -------------------
+# namespace A {
+# // namespace B  // 不修复命名空间注释
+# }
+FixNamespaceComments: true
+
+# foreach宏定义
+# 值类型: 字符串列表
+# - foreach
+# - Q_FOREACH
+# - BOOST_FOREACH:
+# foreach (x in list) { ... }  // 识别为循环语句
+# []:
+# foreach (x in list) { ... }  // 不识别为循环语句
+# ForEachMacros:
+#   - foreach
+#   - Q_FOREACH
+#   - BOOST_FOREACH
+
+# 头文件包含块分组
+# 可选值: Preserve(保留) | Merge(合并) | Regroup(重新分组)
+# Preserve:
+# #include "a.h"
+# #include <b.h>  // 保留原有分组
+# Regroup:
+# #include <b.h>
+# #include "a.h"  // 重新分组头文件
+# IncludeBlocks: Regroup
+
+# 头文件分类
+# IncludeCategories:
+#   - Regex: '^<ext/.*\.h>'
+#     Priority: 2
+#     SortPriority: 0
+#   - Regex: '^<.*\.h>'
+#     Priority: 1
+#     SortPriority: 0
+#   - Regex: "^<.*"
+#     Priority: 2
+#     SortPriority: 0
+#   - Regex: ".*"
+#     Priority: 3
+#     SortPriority: 0
+
+# 主包含文件正则
+# 值类型: 正则表达式字符串
+# "([-_](test|unittest))?$":
+# main_test.cpp  // 识别为主文件
+# "":
+# main_test.cpp  // 不识别为主文件
+# IncludeIsMainRegex: "([-_](test|unittest))?$"
+
+# 主源文件正则
+# 值类型: 正则表达式字符串
+# IncludeIsMainSourceRegex: ""
+
+# case标签缩进
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# switch (x) {
+# case 1:  // case不缩进
+#     break;
+# }
+# -------------------
+# true:
+# -------------------
+# switch (x) {
+#     case 1:  // case相对于switch缩进
+#         break;
+# }
+IndentCaseLabels: true
+
+# goto标签缩进
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# label:  // goto标签不缩进
+# foo();
+# -------------------
+# true:
+# -------------------
+#     label:  // goto标签缩进
+#     foo();
+# IndentGotoLabels: true
+
+# 预处理指令缩进
+# 可选值: None(不缩进) | AfterHash(在#后缩进)
+# -------------------
+# None:
+# -------------------
+# #ifdef X  // 预处理指令不缩进
+# #endif
+# -------------------
+# AfterHash:
+# -------------------
+# #  ifdef X  // 在#后缩进
+# #  endif
+IndentPPDirectives: AfterHash
+PPIndentWidth: 1
+
+# 缩进宽度
+# 可选值: 正整数
+# 4:
+# void foo() {
+#     if (x) {  // 4空格缩进
+#         bar();
+#     }
+# }
+# 2:
+# void foo() {
+#   if (x) {  // 2空格缩进
+#     bar();
+#   }
+# }
+IndentWidth: 4
+
+# 包装函数名缩进
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# void
+# veryLongFunctionName();  // 函数名不额外缩进
+# -------------------
+# true:
+# -------------------
+# void
+#     veryLongFunctionName();  // 函数名额外缩进
+# IndentWrappedFunctionNames: false
+
+# JavaScript引号样式
+# 可选值: Leave(保留) | Single(单引号) | Double(双引号)
+# Leave:
+# const s = "string";  // 保持原样
+# Single:
+# const s = 'string';  // 强制单引号
+# JavaScriptQuotes: Leave
+
+# JavaScript导入换行
+# 可选值: true | false(不换行)
+# -------------------
+# false:
+# -------------------
+# import {longName1, longName2} from 'module';
+# -------------------
+# true:
+# -------------------
+# import {longName1,
+#         longName2} from 'module';  // 导入换行
+# JavaScriptWrapImports: true
+
+# 保留代码块起始空行
+# 可选值: true(保留) | false(不保留)
+# -------------------
+# true:
+# -------------------
+# void foo() {
+#
+#     bar();  // 保留起始空行
+# }
+# -------------------
+# false:
+# -------------------
+# void foo() {
+#     bar();  // 不保留起始空行
+# }
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# 宏块开始标记
+# 值类型: 字符串
+# "BEGIN":
+# // BEGIN  // 宏块开始
+# int x;
+# // END    // 宏块结束
+# "":
+# // BEGIN  // 不识别为宏块
+# int x;
+# // END
+# MacroBlockBegin: ""
+# MacroBlockEnd: ""
+
+# 最大保留连续空行数
+# 可选值: 正整数
+# 1:
+# int x;
+#
+# int y;  // 最多保留1个空行
+# 2:
+# int x;
+#
+#
+# int y;  // 最多保留2个空行
+MaxEmptyLinesToKeep: 1
+
+# 命名空间缩进
+# 可选值: None(不缩进) | Inner(内部缩进) | All(全部缩进)
+# -------------------
+# None:
+# -------------------
+# namespace A {
+# void foo();  // 命名空间内不额外缩进
+# }
+# -------------------
+# Inner:
+# -------------------
+# namespace A {
+#   void foo();  // 命名空间内部缩进
+# }
+# NamespaceIndentation: None
+
+# ObjC协议列表打包
+# 可选值: Never(从不打包) | MultiLine(多行时打包) | Always(总是打包)
+# -------------------
+# Never:
+# -------------------
+# @protoc
+# -------------------ol P1, P2;  // 协议列表不打包
+# Always:
+# -------------------
+# @protocol P1
+# @protocol P2  // 协议列表总是打包
+# ObjCBinPackProtocolList: Never
+
+# ObjC块缩进宽度
+# 值类型: 整数
+# 2:
+# [object method:^{
+#   statement;  // ObjC块缩进2个空格
+# }];
+# 4:
+# [object method:^{
+#     statement;  // ObjC块缩进4个空格
+# }];
+# ObjCBlockIndentWidth: 2
+
+# ObjC属性后空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# @property(atomic) int x;  // 属性后不加空格
+# -------------------
+# true:
+# -------------------
+# @property(atomic) int x ;  // 属性后加空格
+# ObjCSpaceAfterProperty: false
+
+# ObjC协议列表前空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# @interface MyClass<Protocol>  // 协议列表前不加空格
+# -------------------
+# true:
+# -------------------
+# @interface MyClass <Protocol>  // 协议列表前加空格
+# ObjCSpaceBeforeProtocolList: true
+
+# 赋值换行惩罚
+# 值类型: 整数
+# 2: 影响赋值操作符前的换行优先级
+# 100: 更倾向于在赋值前换行
+# PenaltyBreakAssignment: 2
+
+# 函数调用第一个参数前换行惩罚
+# 值类型: 整数
+# 1: 影响函数第一个参数前的换行优先级
+# 100: 更倾向于在第一个参数前换行
+# PenaltyBreakBeforeFirstCallParameter: 1
+
+# 注释换行惩罚
+# 值类型: 整数
+# 300: 影响注释前的换行优先级
+# 1000: 更倾向于在注释前换行
+# PenaltyBreakComment: 300
+
+# 第一个<<运算符换行惩罚
+# 值类型: 整数
+# 120: 影响流操作符前的换行优先级
+# 1000: 更倾向于在<<前换行
+# PenaltyBreakFirstLessLess: 120
+
+# 字符串换行惩罚
+# 值类型: 整数
+# 1000: 影响字符串字面量的换行优先级
+# 10000: 更倾向于在字符串前换行
+# PenaltyBreakString: 1000
+
+# 模板声明换行惩罚
+# 值类型: 整数
+# 10: 影响模板声明前的换行优先级
+# 100: 更倾向于在模板声明前换行
+# PenaltyBreakTemplateDeclaration: 10
+
+# 超长字符惩罚
+# 值类型: 整数
+# 1000000: 影响超长行的换行优先级
+# 10000000: 更倾向于在超长行前换行
+# PenaltyExcessCharacter: 1000000
+
+# 返回类型单独一行惩罚
+# 值类型: 整数
+# 200: 影响返回类型单独一行的优先级
+# 1000: 更倾向于返回类型单独一行
+# PenaltyReturnTypeOnItsOwnLine: 200
+
+# 指针对齐
+# 可选值: Left(左对齐) | Right(右对齐) | Middle(中间对齐)
+# -------------------
+# Left:
+# -------------------
+# int *p;   // 指针左对齐
+# char *cp;
+# -------------------
+# Right:
+# -------------------
+# int* p;   // 指针右对齐
+# char* cp;
+# PointerAlignment: Right
+
+# 原始字符串格式
+# RawStringFormats:
+#   - Language: Cpp
+#     Delimiters:
+#       - cc
+#       - CC
+#       - cpp
+#       - Cpp
+#       - CPP
+#       - "c++"
+#       - "C++"
+#     CanonicalDelimiter: ""
+#     BasedOnStyle: google
+#   - Language: TextProto
+#     Delimiters:
+#       - pb
+#       - PB
+#       - proto
+#       - PROTO
+#     EnclosingFunctions:
+#       - EqualsProto
+#       - EquivToProto
+#       - PARSE_PARTIAL_TEXT_PROTO
+#       - PARSE_TEST_PROTO
+#       - PARSE_TEXT_PROTO
+#       - ParseTextOrDie
+#       - ParseTextProtoOrDie
+#     CanonicalDelimiter: ""
+#     BasedOnStyle: google
+
+# 重新流动注释
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# /* 这个很长的注释不会被自动重新格式化 */
+# -------------------
+# true:
+# -------------------
+# /* 这个很长的注释会被自动
+#  * 重新格式化为多行 */
+ReflowComments: true
+
+# 排序include
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# #include "b.h"
+# #include "a.h"  // 不排序#include的顺序
+# -------------------
+# true:
+# -------------------
+# #include "a.h"
+# #include "b.h"  // 自动排序#include
+SortIncludes: false
+
+# 排序using声明
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# using std::vector;
+# using std::string;  // 不排序using声明
+# -------------------
+# true:
+# -------------------
+# using std::string;
+# using std::vector;  // 自动排序using声明
+# SortUsingDeclarations: false
+
+# C风格转换后是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int x = (int)y;  // 转换后不加空格
+# -------------------
+# true:
+# -------------------
+# int x = (int) y;  // 转换后加空格
+SpaceAfterCStyleCast: false
+
+# 逻辑非后是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# if (!condition)  // 逻辑非后不加空格
+# -------------------
+# true:
+# -------------------
+# if (! condition)  // 逻辑非后加空格
+# SpaceAfterLogicalNot: false
+
+# template关键字后是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# template<typename T>  // template后不加空格
+# -------------------
+# true:
+# -------------------
+# template <typename T>  // template后加空格
+# SpaceAfterTemplateKeyword: true
+
+# 赋值运算符前是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int x=1;  // =前不加空格
+# -------------------
+# true:
+# -------------------
+# int x = 1;  // =前加空格
+SpaceBeforeAssignmentOperators: true
+
+# C++11大括号列表前是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# vector<int> v{1, 2, 3};  // 大括号前不加空格
+# -------------------
+# true:
+# -------------------
+# vector<int> v {1, 2, 3};  // 大括号前加空格
+# SpaceBeforeCpp11BracedList: false
+
+# 构造函数初始化列表冒号前是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# MyClass::MyClass(): a(1)  // 冒号前不加空格
+# -------------------
+# true:
+# -------------------
+# MyClass::MyClass () : a(1)  // 冒号前加空格
+# SpaceBeforeCtorInitializerColon: true
+
+# 继承冒号前是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# class Derived: public Base  // 继承冒号前不加空格
+# -------------------
+# true:
+# -------------------
+# class Derived : public Base  // 继承冒号前加空格
+# SpaceBeforeInheritanceColon: true
+
+# 圆括号前是否加空格(控制语句)
+# 可选值: Never(不加) | ControlStatements(控制语句加) | Always(总是加)
+# -------------------
+# Never:
+# -------------------
+# if(x)  // 圆括号前不加空格
+# ControlStatements:
+# if (x)  // 控制语句的圆括号前加空格
+# SpaceBeforeParens: ControlStatements
+
+# 基于范围的for循环冒号前是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# for (auto x: range)  // 冒号前不加空格
+# -------------------
+# true:
+# -------------------
+# for (auto x : range)  // 冒号前加空格
+# SpaceBeforeRangeBasedForLoopColon: true
+
+# 空代码块内是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# void foo() {}  // 空块内不加空格
+# -------------------
+# true:
+# -------------------
+# void foo() { }  // 空块内加空格
+# SpaceInEmptyBlock: false
+
+# 空圆括号内是否加空格
+# 可选值: true | false
+# -------------------
+# false:
+# -------------------
+# void foo()  // 圆括号内不加空格
+# -------------------
+# true:
+# -------------------
+# void foo( )  // 圆括号内加空格
+# SpaceInEmptyParentheses: false
+
+# 尾随注释前加1个空格
+# 可选值: 正整数
+# 1:
+# int x; // 注释前有1个空格
+# 2:
+# int x;  // 注释前有2个空格
+SpacesBeforeTrailingComments: 1
+
+# 尖括号内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# vector<int>  // 尖括号内不加空格
+# -------------------
+# true:
+# -------------------
+# vector< int >  // 尖括号内加空格
+# SpacesInAngles: false
+
+# 条件语句内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# if (x)  // 条件语句内不加空格
+# -------------------
+# true:
+# -------------------
+# if ( x )  // 条件语句内加空格
+# SpacesInConditionalStatement: false
+
+# 容器字面量内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# int a[] = {1,2,3};  // 容器字面量内不加空格
+# -------------------
+# true:
+# -------------------
+# int a[] = {1, 2, 3};  // 容器字面量内加空格
+# SpacesInContainerLiterals: false
+
+# C风格转换圆括号内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# (int)x  // 转换圆括号内不加空格
+# -------------------
+# true:
+# -------------------
+# ( int )x  // 转换圆括号内加空格
+# SpacesInCStyleCastParentheses: false
+
+# 圆括号内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# foo(x)  // 圆括号内不加空格
+# -------------------
+# true:
+# -------------------
+# foo( x )  // 圆括号内加空格
+# SpacesInParentheses: false
+
+# 方括号内是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# a[x]  // 方括号内不加空格
+# -------------------
+# true:
+# -------------------
+# a[ x ]  // 方括号内加空格
+# SpacesInSquareBrackets: false
+
+# 方括号前是否加空格
+# 可选值: false, true
+# -------------------
+# false:
+# -------------------
+# a[x]  // 方括号前不加空格
+# -------------------
+# true:
+# -------------------
+# a [x]  // 方括号前加空格
+# SpaceBeforeSquareBrackets: false
+
+# 使用C++最新标准
+# 可选值: Latest, Cpp03, Cpp11, Cpp14, Cpp17, Cpp20, Auto
+# Latest: 支持最新的C++特性
+# Cpp11: 仅支持C++11特性
+Standard: Latest
+
+# 语句宏定义
+# 值类型: 字符串列表
+# - Q_UNUSED
+# - QT_REQUIRE_VERSION:
+# Q_UNUSED(x);  // 识别为语句宏
+# []:
+# Q_UNUSED(x);  // 不识别为语句宏
+# StatementMacros:
+#   - Q_UNUSED
+#   - QT_REQUIRE_VERSION
+
+# 制表符宽度
+# 可选值: 正整数
+# 4: 制表符被视为4个空格宽度
+# 8: 制表符被视为8个空格宽度
+TabWidth: 4
+
+# 是否使用CRLF换行
+# 可选值: true(使用) | false(不使用)
+# -------------------
+# true: 使用CRLF换行符(\r\n)
+# -------------------
+# false: 使用LF换行符(\n)
+# -------------------
+UseCRLF: false
+
+# 是否使用制表符
+# 可选值: Never, ForIndentation, ForContinuationAndIndentation, Always
+# -------------------
+# Never: 全部使用空格缩进
+# -------------------
+# Always: 尽可能使用制表符缩进
+# -------------------
+UseTab: Never
