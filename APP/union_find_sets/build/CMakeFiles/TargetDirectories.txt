@@ -1,3 +1,0 @@
-C:/Users/zhouwei43/Desktop/algorithm_packet/APP/union_find_sets/build/CMakeFiles/union_find_sets.dir
-C:/Users/zhouwei43/Desktop/algorithm_packet/APP/union_find_sets/build/CMakeFiles/edit_cache.dir
-C:/Users/zhouwei43/Desktop/algorithm_packet/APP/union_find_sets/build/CMakeFiles/rebuild_cache.dir

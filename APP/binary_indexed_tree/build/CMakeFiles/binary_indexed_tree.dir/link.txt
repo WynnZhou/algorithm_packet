@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\binary_indexed_tree.dir/objects.a
-C:\mingw64\bin\ar.exe qc CMakeFiles\binary_indexed_tree.dir/objects.a @CMakeFiles\binary_indexed_tree.dir\objects1.rsp
-C:\mingw64\bin\cc.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\binary_indexed_tree.dir/objects.a -Wl,--no-whole-archive -o C:\Users\zhouwei43\Desktop\algorithm_packet\APP\binary_indexed_tree\bin\binary_indexed_tree.exe -Wl,--out-implib,libbinary_indexed_tree.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\binary_indexed_tree.dir\linkLibs.rsp
